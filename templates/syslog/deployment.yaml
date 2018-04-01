@@ -18,8 +18,9 @@ spec:
         image: "{{ .Values.platmaticSyslogImage }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         ports:
-        - name: web
-          containerPort: 8080
+          - name: syslog-tcp
+            containerPort: 8080
+            protocol: TCP
         resources:
           requests:
             memory: 16Mi
