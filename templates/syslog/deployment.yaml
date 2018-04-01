@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "platmatic-syslog.fullname" . }}
+  labels:
+    app: {{ template "platmatic-syslog.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "platmatic-syslog.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "platmatic-syslog.fullname" . }}
+        image: "{{ .Values.platmaticSyslogImage }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        ports:
+        - name: web
+          containerPort: 8080
+        resources:
+          requests:
+            memory: 16Mi
+            cpu: 100m

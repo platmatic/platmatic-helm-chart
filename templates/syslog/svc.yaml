@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template ""platmatic-syslog.fullname" . }}
+  labels:
+    app: {{ template ""platmatic-syslog.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  type: LoadBalancer
+  ports:
+  - name: {{ template ""platmatic-syslog.fullname" . }}
+    port: 556
+    targetPort: 8080
+  selector:
+    app: {{ template ""platmatic-syslog.fullname" . }}

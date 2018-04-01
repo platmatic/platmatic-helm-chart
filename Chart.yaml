@@ -1,0 +1,4 @@
+apiVersion: v1
+description: platmatic
+name: platmatic-helm
+version: 0.0.1
